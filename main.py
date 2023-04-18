@@ -21,17 +21,14 @@ def predict():
     image_file = request.files['image']
 
     # Upload the image file to Roboflow
-    response = rf.upload(image_file)
-
-    # Get the URL of the uploaded image
-    image_url = response['url']
+    response = image_file.read()
 
     # Get the Roboflow project and model
     project = rf.workspace().project("pipe-analysis")
     model = project.version(2).model
 
     # Infer on the uploaded image
-    prediction = model.predict(image_url).json()
+    prediction = model.predict(response).json()
 
     # Save the annotated image
     annotated_image_url = prediction['outputs'][0]['annotation']
