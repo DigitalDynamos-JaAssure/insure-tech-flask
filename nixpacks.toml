@@ -1,0 +1,12 @@
+buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1671044363'
+
+[variables]
+LD_LIBRARY_PATH = '/lib/x86_64-linux-gnu/:/usr/local/bin:/usr/lib/'
+
+[phases.setup]
+providers = ["...", "python"]
+nixPkgs = ["..."]
+aptPkgs = ["...", "ffmpeg", "libsm6","libxext6"]
+
+[phases.build]
+cmds = ["echo start build", "...", "echo done build"]
