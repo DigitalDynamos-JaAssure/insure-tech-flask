@@ -42,4 +42,4 @@ def predict():
     return Response(response=base64_image, content_type='text/plain')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
