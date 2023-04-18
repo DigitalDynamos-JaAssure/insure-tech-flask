@@ -31,9 +31,7 @@ def predict():
     # Infer on the uploaded image
     prediction = model.predict('./img.png').save('./response.png')
 
-    # Save the annotated image
-    response = requests.get(annotated_image_url)
-    import base64
+    
     with open("./response.png", "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
 
