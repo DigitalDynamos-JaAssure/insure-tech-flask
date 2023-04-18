@@ -26,7 +26,7 @@ def predict():
 
     # Get the Roboflow project and model
     project = rf.workspace().project("pipe-analysis")
-    model = project.version(2).model
+    model = project.version(4).model
 
     # Infer on the uploaded image
     prediction = model.predict('./img.png').save('./response.png')
