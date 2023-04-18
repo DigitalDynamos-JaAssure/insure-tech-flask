@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from roboflow import Roboflow
 import requests
 import os
+import base64
 app = Flask(__name__)
 
 
@@ -28,16 +29,15 @@ def predict():
     model = project.version(2).model
 
     # Infer on the uploaded image
-    prediction = model.predict('./img.png').json()
+    prediction = model.predict('./img.png').save('./response.png')
 
     # Save the annotated image
-    annotated_image_url = prediction['outputs'][0]['annotation']
     response = requests.get(annotated_image_url)
-    with open("prediction.jpg", "wb") as f:
-        f.write(response.content)
-        print("Annotated image has been saved as prediction.jpg")
+    import base64
+    with open("./response.png", "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
 
-    return Response(response=base64_image, content_type='text/plain')
+    return Response(response=my_string, content_type='text/plain')
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
