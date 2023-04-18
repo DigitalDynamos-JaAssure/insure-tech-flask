@@ -38,7 +38,7 @@ def predict():
     return my_string
   
 @app.route('/detectDamage', methods=['POST'])
-def predict():
+def detect():
     # Get the uploaded image file from the request
     image_file = request.files['image']
 
