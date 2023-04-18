@@ -35,7 +35,7 @@ def predict():
     with open("./response.png", "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
 
-    return Response(response=my_string, content_type='text/plain')
+    return my_string
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
